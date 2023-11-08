@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="MostrarMenu()" color="primary">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Información tarea</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle *ngIf="usuario.role === 'docente'">ID: {{tarea.id}}</ion-card-subtitle>
+      <ion-card-title><strong style="font-size: xx-large; color: white;">{{tarea.titulo}}</strong></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <span><b style="font-size: medium; color: white;">Descripción:</b> {{tarea.descripcion}}</span>
+      <br>
+      <br>
+      <span><b style="font-size: medium; color: white;">Estudiante(s) asignado(s):</b> {{tarea.estudianteAsignado}}</span>
+      <br>
+      <br>
+      <span><b style="font-size: medium; color: white;">Obligatoria:</b> {{ tarea.obligatoria ? 'Sí' : 'No' }}</span>
+    </ion-card-content>
+    <ion-button *ngIf="usuario.role === 'docente'" [routerLink]="['/actualizar-tarea', tarea.id]" color="warning">
+      <ion-icon name="create"></ion-icon>
+    </ion-button>
+    <ion-button *ngIf="usuario.role === 'docente'" [routerLink]="['/eliminar-tarea', tarea.id]" color="danger">
+      <ion-icon name="trash"></ion-icon>
+    </ion-button>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+     <ion-button (click)="MostrarMenu()" color="primary">
+       <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+     </ion-button>
+    </ion-buttons>
+   <ion-title >Inicio</ion-title>
+   <ion-buttons slot="end">
+    <ion-button (click)="LogOut()"><div style="color: rgb(255, 217, 0); font-weight: bold">SALIR ㅤ</div><ion-icon name="log-out-outline" color="warning"></ion-icon></ion-button>
+  </ion-buttons>
+ </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <img style="padding-top: 15px; padding-left: 7px;" src="assets/LOGO_APP.png" alt="RegistrAPP">
+  
+  <ion-item>
+    <ion-label position="floating">Digite una palabra: </ion-label>
+    <ion-input type="text"  [(ngModel)]="data.texto"></ion-input>
+  </ion-item>
+
+  <ion-button (click)="generarQr()" expand="block" shape="round">
+    Generar Qr
+  </ion-button>
+
+  <ion-card class="ion-text-center">
+    <ion-card-content>
+      <qrcode [qrdata]="mensaje" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

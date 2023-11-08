@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="MostrarMenu()" color="primary">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="usuario.role === 'docente'" slot="end">
+      <ion-button [routerLink]="['/agregar-tareas']">Agregar</ion-button>
+    </ion-buttons>
+    <ion-title>Tareas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let a of tareas; let i=index" [routerLink]="['/info-tarea', a.id]">
+      <ion-label><strong style="font-size: x-large;">{{a['titulo']}} &nbsp;</strong>
+        <div><b>Estudiante asignado:</b> {{a['estudianteAsignado']}} &nbsp;</div>
+        <div><b>Obligatoria:</b> {{a['obligatoria'] ? 'Sí' : 'No'}}</div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
