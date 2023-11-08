@@ -1,11 +1,11 @@
 {
   "tareas": [
     {
+      "id": 4,
       "titulo": "Entrega 3",
       "descripcion": "Entrega 3 de Apps Móviles",
       "estudianteAsignado": "Ismael Araya",
-      "obligatoria": false,
-      "id": 4
+      "obligatoria": true
     },
     {
       "titulo": "Prueba 2",

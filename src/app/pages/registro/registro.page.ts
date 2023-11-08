@@ -26,10 +26,11 @@ export class RegistroPage implements OnInit {
   userdata: any;
 
   constructor(private alertcontroller: AlertController, private toastController: ToastController, private authservice: AuthService, private formBuilder: FormBuilder, private menuController: MenuController, private ApiCrud: ApiCrudService, private router: Router) { 
-              this.registroForm = this.formBuilder.group({
-                'username': new FormControl("", [Validators.required, Validators.minLength(4)]),
-                'password': new FormControl("", [Validators.required, Validators.minLength(4)])
-              });
+    this.registroForm = this.formBuilder.group({
+      'username': new FormControl(this.newUsuario.username, [Validators.required, Validators.minLength(4)]),
+      'password': new FormControl(this.newUsuario.password, [Validators.required, Validators.minLength(4)]),
+      'role': new FormControl(this.newUsuario.role, [Validators.required])
+    });
    }
 
   ngOnInit() {
@@ -39,8 +40,14 @@ export class RegistroPage implements OnInit {
     this.menuController.open('first');
   }
   crearUsuario() {
-    this.ApiCrud.crearUsuario(this.newUsuario).subscribe();
-    this.router.navigateByUrl("/login");
+    if (this.registroForm.valid){
+      this.newUsuario = this.registroForm.value;
+      this.ApiCrud.crearUsuario(this.newUsuario).subscribe(() => {
+        this.router.navigateByUrl("/login");
+      });
+    } else {
+      this.datosIncorrectos();
+    }
   }
 
   async datosIncorrectos(){

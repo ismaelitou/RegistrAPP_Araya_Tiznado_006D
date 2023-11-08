@@ -13,16 +13,16 @@
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle *ngIf="usuario.role === 'docente'">ID: {{tarea.id}}</ion-card-subtitle>
-      <ion-card-title>Título: {{tarea.titulo}}</ion-card-title>
+      <ion-card-title><strong style="font-size: xx-large; color: white;">{{tarea.titulo}}</strong></ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <span>Descripción: {{tarea.descripcion}}</span>
+      <span><b style="font-size: medium; color: white;">Descripción:</b> {{tarea.descripcion}}</span>
       <br>
       <br>
-      <span>Estudiante(s) asignado(s): {{tarea.estudianteAsignado}}</span>
+      <span><b style="font-size: medium; color: white;">Estudiante(s) asignado(s):</b> {{tarea.estudianteAsignado}}</span>
       <br>
       <br>
-      <span>Obligatoria: {{tarea.obligatoria}}</span>
+      <span><b style="font-size: medium; color: white;">Obligatoria:</b> {{ tarea.obligatoria ? 'Sí' : 'No' }}</span>
     </ion-card-content>
     <ion-button *ngIf="usuario.role === 'docente'" [routerLink]="['/actualizar-tarea', tarea.id]" color="warning">
       <ion-icon name="create"></ion-icon>

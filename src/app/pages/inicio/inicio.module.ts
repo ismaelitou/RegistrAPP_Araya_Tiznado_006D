@@ -7,9 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { InicioPageRoutingModule } from './inicio-routing.module';
 
 import { InicioPage } from './inicio.page';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   imports: [
+    QRCodeModule,
     CommonModule,
     FormsModule,
     IonicModule,

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AutorizadoGuard } from './guards/autorizado.guard';
+import { Router } from '@angular/router';
+import { AuthService } from './servicios/auth.service';
 
 interface Componente{
   name: string;
@@ -12,7 +15,12 @@ interface Componente{
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  usuario: { role: string | undefined } = { role: '' };
+  constructor(private autorizadoGuard: AutorizadoGuard, private router: Router, private authService: AuthService) {}
+
+  ngOnInit() {
+    this.usuario.role = this.authService.GetUserRole();
+  }
 
   componentes : Componente[] = [
     {
@@ -29,11 +37,6 @@ export class AppComponent {
       name:'Tareas',
       icon: 'book-outline',
       redirecTo:'/tareas'
-    },
-    {
-      name:'Cerrar sesión',
-      icon: 'log-out-outline',
-      redirecTo:'/login'
     }
   ]
 

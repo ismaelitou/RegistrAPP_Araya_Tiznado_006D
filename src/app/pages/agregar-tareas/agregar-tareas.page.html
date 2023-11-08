@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="MostrarMenu()" color="primary">
-        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
-      </ion-button>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tareas"></ion-back-button>
+      </ion-buttons>
     </ion-buttons>
     <ion-title>Agregar tarea</ion-title>
   </ion-toolbar>
@@ -16,30 +16,45 @@
     </ion-toolbar>
   </ion-header>
 
-  <form>
+  <form [formGroup]="tareaForm">
     <ion-item>
       <ion-label>Título:</ion-label>
-      <ion-input type="text" name="txtTitulo" [(ngModel)]="newTarea.titulo" placeholder="Título de la tarea" required></ion-input>
+      <ion-input formControlName="titulo" type="text" name="txtTitulo" [(ngModel)]="newTarea.titulo" placeholder="Título de la tarea"></ion-input>
     </ion-item>
+    <div *ngIf="tareaForm.get('titulo')?.invalid && (tareaForm.get('titulo')?.dirty || tareaForm.get('titulo')?.touched)">
+      <div style="color: red" *ngIf="tareaForm.get('titulo')?.hasError('required')">
+        El título es obligatorio.
+      </div>
+    </div>
 
     <ion-item>
       <ion-label>Descripción:</ion-label>
-      <ion-input type="text" name="txtDescripcion" [(ngModel)]="newTarea.descripcion" placeholder="Descripción de la tarea" required></ion-input>
+      <ion-input formControlName="descripcion" type="text" name="txtDescripcion" [(ngModel)]="newTarea.descripcion" placeholder="Descripción de la tarea"></ion-input>
     </ion-item>
+    <div *ngIf="tareaForm.get('descripcion')?.invalid && (tareaForm.get('descripcion')?.dirty || tareaForm.get('descripcion')?.touched)">
+      <div style="color: red" *ngIf="tareaForm.get('descripcion')?.hasError('required')">
+        La descripcion es obligatoria.
+      </div>
+    </div>
 
     <ion-item>
       <ion-label>Estudiante(s) asignado(s):</ion-label>
-      <ion-input type="text" name="txtEstudiante" [(ngModel)]="newTarea.estudianteAsignado" placeholder="Estudiante asignado para la tarea" required></ion-input>
+      <ion-input formControlName="estudianteAsignado" type="text" name="txtEstudiante" [(ngModel)]="newTarea.estudianteAsignado" placeholder="Estudiante asignado para la tarea"></ion-input>
     </ion-item>
+    <div *ngIf="tareaForm.get('estudianteAsignado')?.invalid && (tareaForm.get('estudianteAsignado')?.dirty || tareaForm.get('estudianteAsignado')?.touched)">
+      <div style="color: red" *ngIf="tareaForm.get('estudianteAsignado')?.hasError('required')">
+        El estudiante es obligatorio.
+      </div>
+    </div>
 
     <ion-item>
       <ion-label>Obligatoria:</ion-label>
-      <ion-checkbox name="booleanObligatoria" [(ngModel)]="newTarea.obligatoria" required></ion-checkbox>
+      <ion-checkbox formControlName="obligatoria" name="booleanObligatoria" [(ngModel)]="newTarea.obligatoria"></ion-checkbox>
     </ion-item>
 
     <ion-row>
       <ion-col>
-        <ion-button (click)="crearTarea()" expand="block" color="success">Crear tarea!</ion-button>
+        <ion-button (click)="crearTarea()" [disabled]="!tareaForm.valid" expand="block" color="success">Crear tarea!</ion-button>
       </ion-col>
     </ion-row>    
   </form>

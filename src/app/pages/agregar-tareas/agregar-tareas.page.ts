@@ -3,6 +3,9 @@ import { MenuController } from '@ionic/angular';
 import { NuevaTarea } from 'src/app/interfaces/nuevaTarea';
 import { ApiCrudService } from 'src/app/servicios/apicrud.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-agregar-tareas',
@@ -10,7 +13,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./agregar-tareas.page.scss'],
 })
 export class AgregarTareasPage implements OnInit {
-
   newTarea: NuevaTarea = {
     titulo: "",
     descripcion: "",
@@ -18,9 +20,25 @@ export class AgregarTareasPage implements OnInit {
     obligatoria: false
   }
 
-  constructor(private menuController: MenuController, private ApiCrud: ApiCrudService, private router: Router) { }
+  tareaForm: FormGroup;
+
+  constructor(private toastcontroller: ToastController, private menuController: MenuController, private alertcontroller: AlertController, private ApiCrud: ApiCrudService, private router: Router, private formBuilder: FormBuilder) {
+    this.tareaForm = this.formBuilder.group({
+      'titulo': new FormControl("", [Validators.required]),
+      'descripcion': new FormControl("", [Validators.required]),
+      'estudianteAsignado': new FormControl("", [Validators.required])
+    });
+  }
 
   ngOnInit() {
+  }
+
+  async showToast(msg: any){
+    const toast=await this.toastcontroller.create({
+      message : msg,
+      duration: 3000
+    });
+    toast.present();
   }
 
   MostrarMenu(){
@@ -28,7 +46,12 @@ export class AgregarTareasPage implements OnInit {
   }
 
   crearTarea(){
-    this.ApiCrud.crearTarea(this.newTarea).subscribe();
-    this.router.navigateByUrl("/tareas");
+    if (this.tareaForm.valid){
+      this.ApiCrud.crearTarea(this.newTarea).subscribe(() => {
+        this.router.navigateByUrl("/inicio");
+        const mensaje = `Tarea creada con exito! Vuelva a la lista de tareas para verla.`;
+        this.showToast(mensaje);
+      });
+    }
   }
 }

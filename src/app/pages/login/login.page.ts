@@ -100,7 +100,6 @@ export class LoginPage implements OnInit {
       message: 'Revise sus credenciales.',
       buttons: ['Ok']
     });
-  
     await alerta.present();
     return;
   }
