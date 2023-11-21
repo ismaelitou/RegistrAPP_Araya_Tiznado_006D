@@ -5,7 +5,8 @@
 3. Se debe abrir la línea de comandos en la carpeta raíz e ingresar: 
     1. npm install angularx-qrcode --save
     2. npm install --save-dev @types/qrcode
-    3. "ionic lab" o "ionic serve" (modo escritorio).
+    3. npm install date-fns
+    4. "ionic lab" o "ionic serve" (modo escritorio).
 
 Testeado en navegador Firefox. Pueden existir problemas con otros navegadores (no se probó).
 Codificado con Visual Studio Code.
