@@ -11,4 +11,7 @@
 Testeado en navegador Firefox. Pueden existir problemas con otros navegadores (no se probó).
 Codificado con Visual Studio Code.
 
+- FALLOS -
 Existe solo un bug el cual consiste en iniciar sesión con un usuario después de haber cerrado sesión con un usuario distinto e ingresar al perfil. Se mostrarán las credenciales del usuario anterior, sin embargo esto se soluciona al salir del perfil y volver a ingresar o refrescar la page.
+También la app no es capaz de abrir la cámara y leer el QR para almacenar la asistencia debido a varios problemas con la implementación. Tampoco se puede editar el usuario (a pesar de existir las pages para ello).
+Lo sentimos.
