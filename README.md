@@ -10,3 +10,5 @@
 
 Testeado en navegador Firefox. Pueden existir problemas con otros navegadores (no se probó).
 Codificado con Visual Studio Code.
+
+Existe solo un bug el cual consiste en iniciar sesión con un usuario después de haber cerrado sesión con un usuario distinto e ingresar al perfil. Se mostrarán las credenciales del usuario anterior, sin embargo esto se soluciona al salir del perfil y volver a ingresar o refrescar la page.
