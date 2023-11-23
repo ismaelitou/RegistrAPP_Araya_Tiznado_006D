@@ -11,7 +11,8 @@ const routes: Routes = [
   {
     path: 'inicio',
     loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule),
-    canActivate: [AutorizadoGuard]
+    canActivate: [AutorizadoGuard],
+    data: { tipoUsuario: 'docente' }
   },
   {
     path: 'login',
@@ -53,6 +54,29 @@ const routes: Routes = [
     loadChildren: () => import('./pages/eliminar-tarea/eliminar-tarea.module').then( m => m.EliminarTareaPageModule),
     canActivate: [AutorizadoGuard],
     data: { tipoUsuario: 'docente' }
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule),
+    canActivate: [AutorizadoGuard]
+  },
+  {
+    path: 'registro-docente',
+    loadChildren: () => import('./pages/registro-docente/registro-docente.module').then( m => m.RegistroDocentePageModule)
+  },
+  {
+    path: 'inicio-alumno',
+    loadChildren: () => import('./pages/inicio-alumno/inicio-alumno.module').then( m => m.InicioAlumnoPageModule),
+    canActivate: [AutorizadoGuard],
+    data: { tipoUsuario: 'alumno' }
+  },
+  {
+    path: 'editar-alumno',
+    loadChildren: () => import('./pages/editar-alumno/editar-alumno.module').then( m => m.EditarAlumnoPageModule)
+  },
+  {
+    path: 'editar-docente',
+    loadChildren: () => import('./pages/editar-docente/editar-docente.module').then( m => m.EditarDocentePageModule)
   },
 ];
 

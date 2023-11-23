@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
-import { NuevaTarea } from 'src/app/interfaces/nuevaTarea';
+import { NuevaTarea } from 'src/app/interfaces/tareas';
 import { ApiCrudService } from 'src/app/servicios/apicrud.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -26,7 +26,8 @@ export class AgregarTareasPage implements OnInit {
     this.tareaForm = this.formBuilder.group({
       'titulo': new FormControl("", [Validators.required]),
       'descripcion': new FormControl("", [Validators.required]),
-      'estudianteAsignado': new FormControl("", [Validators.required])
+      'estudianteAsignado': new FormControl("", [Validators.required]),
+      'obligatoria': new FormControl("", [Validators.required])
     });
   }
 
@@ -36,7 +37,9 @@ export class AgregarTareasPage implements OnInit {
   async showToast(msg: any){
     const toast=await this.toastcontroller.create({
       message : msg,
-      duration: 3000
+      duration: 4000,
+      color: 'success',
+      mode: 'ios'
     });
     toast.present();
   }
@@ -47,10 +50,14 @@ export class AgregarTareasPage implements OnInit {
 
   crearTarea(){
     if (this.tareaForm.valid){
+      this.newTarea.titulo = this.tareaForm.get('titulo')?.value;
+      this.newTarea.descripcion = this.tareaForm.get('descripcion')?.value;
+      this.newTarea.estudianteAsignado = this.tareaForm.get('estudianteAsignado')?.value;
+      this.newTarea.obligatoria = this.tareaForm.get('obligatoria')?.value || false;
       this.ApiCrud.crearTarea(this.newTarea).subscribe(() => {
-        this.router.navigateByUrl("/inicio");
-        const mensaje = `Tarea creada con exito! Vuelva a la lista de tareas para verla.`;
-        this.showToast(mensaje);
+        this.showToast('Tarea creada con éxito.');
+        this.tareaForm.reset();
+        this.router.navigateByUrl('/tareas');
       });
     }
   }

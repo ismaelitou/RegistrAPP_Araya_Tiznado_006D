@@ -1,3 +1,15 @@
-.qr-image {
-    width: 100%;
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+.qr-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.qr-wrapper qrcode {
+    margin: auto;
+    display: block;
 }

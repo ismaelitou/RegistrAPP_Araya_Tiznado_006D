@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="font-size: xx-large; font-weight: bold;">Registra tus credenciales</ion-card-title>
+      <ion-card-subtitle>Mínimo 4 carácteres de largo para el nombre de usuario y contraseña.</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+       <form [formGroup]="registroForm">
+        <ion-list>
+          <ion-item>
+            <ion-input label="Nombre de usuario" labelPlacement="floating" formControlName="username" type="text" placeholder="..." name="username"></ion-input>
+          </ion-item>
+          <div color="error" *ngIf="registroForm.get('username')?.invalid && (registroForm.get('username')?.dirty || registroForm.get('username')?.touched)">
+            <div *ngIf="registroForm.get('username')?.hasError('required')">
+              El nombre de usuario es obligatorio.
+            </div>
+            <div *ngIf="registroForm.get('username')?.hasError('minlength')">
+              El nombre de usuario debe ser de mínimo 4 caracteres.
+            </div>
+          </div>
+
+          <ion-item>
+            <ion-input label="Contraseña" labelPlacement="floating" formControlName="password" type="Password" placeholder="..." name="password"></ion-input>
+          </ion-item>
+          <div color="error" *ngIf="registroForm.get('password')?.invalid && (registroForm.get('password')?.dirty || registroForm.get('password')?.touched)">
+            <div *ngIf="registroForm.get('password')?.hasError('required')">
+              La contraseña es obligatoria.
+            </div>
+            <div *ngIf="registroForm.get('password')?.hasError('minlength')">
+              La contraseña debe ser de mínimo 4 caracteres.
+            </div>
+          </div>
+          
+          <ion-item>
+            <ion-input label="Asignatura" labelPlacement="floating" formControlName="asignatura" type="text" placeholder="..." name="asignatura"></ion-input>
+          </ion-item>
+          <div color="error" *ngIf="registroForm.get('asignatura')?.invalid && (registroForm.get('asignatura')?.dirty || registroForm.get('asignatura')?.touched)">
+            <div *ngIf="registroForm.get('asignatura')?.hasError('required')">
+              La asignatura 1 es obligatoria.
+            </div>
+          </div>
+
+          <ion-item>
+            <ion-input label="Asignatura 2" labelPlacement="floating" formControlName="asignatura2" type="text" placeholder="..." name="asignatura2"></ion-input>
+          </ion-item>
+          <div color="error" *ngIf="registroForm.get('asignatura2')?.invalid && (registroForm.get('asignatura2')?.dirty || registroForm.get('asignatura2')?.touched)">
+            <div *ngIf="registroForm.get('asignatura2')?.hasError('required')">
+              La asignatura 1 es obligatoria.
+            </div>
+          </div>
+        </ion-list>
+        <br>
+        <ion-button type="button" (click)="crearDocente()" [disabled]="!registroForm.valid" expand="block" color="success" shape="round" size="large">Regístrate</ion-button>
+       </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

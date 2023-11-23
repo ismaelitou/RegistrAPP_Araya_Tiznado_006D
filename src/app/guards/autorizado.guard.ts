@@ -9,25 +9,31 @@ import { ToastController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class AutorizadoGuard implements CanActivate {
-  constructor(private authservice: AuthService, private router: Router, private toastcontroller: ToastController) {}
+  constructor(
+    private authservice: AuthService, 
+    private Router: Router, 
+    private toastcontroller: ToastController) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
-    Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (!this.authservice.IsLoggedIn()) {
       this.showToast('Debe iniciar sesión para acceder a esta página.');
-      this.router.navigateByUrl("/login");
+      this.Router.navigateByUrl("/login");
       return false;
     }
 
     const usuarioActual = this.authservice.GetUserRole();
 
     if (route.data['tipoUsuario'] && route.data['tipoUsuario'] !== usuarioActual) {
-      this.showToast('No tiene permiso para acceder a esta página.');
-      this.router.navigateByUrl("/inicio");
+    if (usuarioActual === 'alumno') {
+      this.Router.navigateByUrl("/inicio-alumno");
+      return false;
+    } else if (usuarioActual === 'docente') {
+      this.Router.navigateByUrl("/inicio");
       return false;
     }
-
-    return true;
+    return false;
+    }
+  return true;
   }
 
   async showToast(msg: string) {

@@ -1,34 +1,35 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="MostrarMenu()" color="primary">
-        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
-      </ion-button>
+      <ion-buttons slot="start">
+        <ion-back-button color="warning" defaultHref="/tareas"></ion-back-button>
     </ion-buttons>
-    <ion-title>Información tarea</ion-title>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
+  <ion-card color="light">
     <ion-card-header>
-      <ion-card-subtitle *ngIf="usuario.role === 'docente'">ID: {{tarea.id}}</ion-card-subtitle>
-      <ion-card-title><strong style="font-size: xx-large; color: white;">{{tarea.titulo}}</strong></ion-card-title>
+      <ion-card-subtitle style="font-style: italic;" *ngIf="usuario.role === 'docente'">ID: {{tarea.id}}</ion-card-subtitle>
+      <ion-card-title><strong style="font-size: xxx-large;">{{tarea.titulo}}</strong></ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      <span><b style="font-size: medium; color: white;">Descripción:</b> {{tarea.descripcion}}</span>
+    <ion-card-content style="font-size: large;">
+      <span><b>Descripción:</b> {{tarea.descripcion}}</span>
       <br>
       <br>
-      <span><b style="font-size: medium; color: white;">Estudiante(s) asignado(s):</b> {{tarea.estudianteAsignado}}</span>
+      <span><b>Estudiante(s) asignado(s):</b> {{tarea.estudianteAsignado}}</span>
       <br>
       <br>
-      <span><b style="font-size: medium; color: white;">Obligatoria:</b> {{ tarea.obligatoria ? 'Sí' : 'No' }}</span>
+      <span><b>Obligatoria:</b> {{ tarea.obligatoria ? 'Sí' : 'No' }}</span>
+      <br>
+      <br>
+      <ion-button *ngIf="usuario.role === 'docente'" [routerLink]="['/actualizar-tarea', tarea.id]" color="medium" expand="block" shape="round" size="large">
+        Editar <ion-icon slot="end" name="create"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="usuario.role === 'docente'" [routerLink]="['/eliminar-tarea', tarea.id]" color="danger" expand="block" shape="round" size="small">
+        Eliminar <ion-icon slot="end" name="trash"></ion-icon>
+      </ion-button>
     </ion-card-content>
-    <ion-button *ngIf="usuario.role === 'docente'" [routerLink]="['/actualizar-tarea', tarea.id]" color="warning">
-      <ion-icon name="create"></ion-icon>
-    </ion-button>
-    <ion-button *ngIf="usuario.role === 'docente'" [routerLink]="['/eliminar-tarea', tarea.id]" color="danger">
-      <ion-icon name="trash"></ion-icon>
-    </ion-button>
   </ion-card>
 </ion-content>

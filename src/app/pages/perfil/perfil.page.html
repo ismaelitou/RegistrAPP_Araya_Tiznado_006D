@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="warning" [defaultHref]="getInicioUrl()"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card color="warning">
+    <div style="margin-left: 15px; margin-top: 10px;">
+      <ion-text style="color: #9b7700; font-style: italic; font-size: 15px;">{{ role }}</ion-text>
+      <br>
+      <ion-text style="font-size: 40px; font-weight: bolder;">{{ username }}</ion-text>
+    </div>
+    <div class="div-pfp"><img src="assets/pfp.png" alt="Foto de perfil" class="pfp"></div>
+
+    <ion-card-content>
+      <div style="font-size: 20px;" *ngIf="usuario.role === 'docente'">
+        <b>Asignatura 1</b>:<br>{{ asignatura }}
+        <br>
+        <b>Asignatura 2</b>:<br>{{ asignatura2 }}
+        <br>
+        <br>
+      </div>
+      <ion-button [routerLink]="getEditarUrl()" expand="block" color="medium" shape="round" size="large">
+        Editar <ion-icon slot="end" name="create-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="LogOut()" expand="block" color="danger" shape="round" size="small">
+        Cerrar sesión <ion-icon slot="end" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

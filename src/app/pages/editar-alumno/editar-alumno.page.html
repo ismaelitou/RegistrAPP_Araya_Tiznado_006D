@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="warning" defaultHref="/perfil"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="font-size: xx-large; font-weight: bold;">Actualiza tus datos</ion-card-title>
+      <ion-card-subtitle>Mínimo 4 carácteres de largo para el nombre de usuario y contraseña.</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+       <form [formGroup]="editarForm" (ngSubmit)="editarCredenciales()">
+        <ion-list>
+          <ion-item>
+            <ion-input label="Nombre de usuario" labelPlacement="floating" formControlName="username" type="text" placeholder="..." name="username"></ion-input>
+          </ion-item>
+          <div class="error" *ngIf="editarForm.get('username')?.invalid && (editarForm.get('username')?.dirty || editarForm.get('username')?.touched)">
+            <div *ngIf="editarForm.get('username')?.hasError('required')">
+              El nombre de usuario es obligatorio.
+            </div>
+            <div *ngIf="editarForm.get('username')?.hasError('minlength')">
+              El nombre de usuario debe ser de mínimo 4 caracteres.
+            </div>
+          </div>
+
+          <ion-item>
+            <ion-input label="Contraseña" labelPlacement="floating" formControlName="password" type="Password" placeholder="..." name="password"></ion-input>
+          </ion-item>
+          <div class="error" *ngIf="editarForm.get('password')?.invalid && (editarForm.get('password')?.dirty || editarForm.get('password')?.touched)">
+            <div *ngIf="editarForm.get('password')?.hasError('required')">
+              La contraseña es obligatoria.
+            </div>
+            <div *ngIf="editarForm.get('password')?.hasError('minlength')">
+              La contraseña debe ser de mínimo 4 caracteres.
+            </div>
+          </div>                 
+
+        </ion-list>
+        <br>
+        <ion-button type="submit" [disabled]="!editarForm.valid" expand="block" color="warning" shape="round" size="large">Actualizar</ion-button>
+       </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

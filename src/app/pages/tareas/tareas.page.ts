@@ -5,6 +5,7 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { Tarea } from 'src/app/interfaces/tareas';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class TareasPage {
 
   tareas: Tarea[] = [];
 
-  constructor(private authService: AuthService, private tareasService: ApiCrudService, private menuController: MenuController, private loadingController: LoadingController) {
+  constructor(private toastController: ToastController, private authService: AuthService, private tareasService: ApiCrudService, private menuController: MenuController, private loadingController: LoadingController) {
     this.usuario = {
       role: ''
     };
@@ -31,6 +32,18 @@ export class TareasPage {
   ionViewWillEnter() {
     this.usuario.role = this.authService.GetUserRole();
     this.loadTareas();
+    const mensaje = "Selecciona una tarea para ver sus detalles.";
+    this.showToast(mensaje);
+  }
+
+  async showToast(msg: any){
+    const toast=await this.toastController.create({
+      message : msg,
+      duration: 1500,
+      color: 'warning',
+      mode: 'ios'
+    });
+    toast.present();
   }
 
   async loadTareas(event?: InfiniteScrollCustomEvent){

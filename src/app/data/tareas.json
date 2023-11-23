@@ -1,57 +1,64 @@
 {
   "tareas": [
     {
-      "id": 4,
-      "titulo": "Entrega 3",
-      "descripcion": "Entrega 3 de Apps Móviles",
+      "id": 1,
+      "titulo": "Prueba 3",
+      "descripcion": "Prueba 3 de Calidad de Software",
       "estudianteAsignado": "Ismael Araya",
       "obligatoria": true
     },
     {
-      "titulo": "Prueba 2",
-      "descripcion": "Prueba 2 de Calidad de Software",
-      "estudianteAsignado": "Ismael Araya",
-      "obligatoria": false,
-      "id": 5
+      "id": 2,
+      "titulo": "Tarea 1",
+      "descripcion": "Tarea complicada",
+      "estudianteAsignado": "Estudiante 1, Estudiante 2",
+      "obligatoria": false
     },
     {
+      "id": 3,
+      "titulo": "Tarea 2",
+      "descripcion": "Tarea más complicada",
+      "estudianteAsignado": "Estudiante",
+      "obligatoria": false
+    },
+    {
+      "id": 4,
+      "titulo": "Tarea 3",
+      "descripcion": "Tarea aún más complicada",
+      "estudianteAsignado": "Toda la sección",
+      "obligatoria": false
+    },
+    {
+      "id": 5,
       "titulo": "Examen",
-      "descripcion": "Examen final",
-      "estudianteAsignado": "Matías Tiznado",
-      "obligatoria": true,
-      "id": 6
+      "descripcion": "Examen final de algún ramo",
+      "estudianteAsignado": "Toda la sección",
+      "obligatoria": true
     }
   ],
   "usuarios": [
     {
-      "username": "Ismael",
+      "username": "Matias",
       "password": "1234",
-      "role": "usuario",
+      "role": "alumno",
       "id": 1
     },
     {
-      "username": "Matias",
+      "username": "Viviana",
       "password": "1234",
       "role": "docente",
+      "asignatura": "Programación de aplicaciones móviles",
+      "asignatura2": "Otro ramo",
       "id": 2
-    },
+    }
+  ],
+  "qr": [
     {
-      "username": "Annays",
-      "password": "1234",
-      "role": "usuario",
-      "id": 3
-    },
-    {
-      "username": "Maxi",
-      "password": "1234",
-      "role": "docente",
-      "id": 4
-    },
-    {
-      "username": "1234",
-      "password": "1234",
-      "role": "docente",
-      "id": 5
+      "username": "Viviana",
+      "asignatura": "Programación de aplicaciones móviles",
+      "fecha": "22-11-2023",
+      "comentario": "Muy buena clase.",
+      "id": 1
     }
   ]
 }

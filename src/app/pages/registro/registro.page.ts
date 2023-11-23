@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { AlertController, MenuController } from '@ionic/angular';
-import { NuevoUsuario } from 'src/app/interfaces/nuevoUsuario';
+import { NuevoAlumno } from 'src/app/interfaces/usuarios';
 import { ApiCrudService } from 'src/app/servicios/apicrud.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/servicios/auth.service';
 })
 
 export class RegistroPage implements OnInit {
-  newUsuario: NuevoUsuario = {
+  newAlumno: NuevoAlumno = {
     username: "",
     password: "",
     role: ""
@@ -24,11 +24,17 @@ export class RegistroPage implements OnInit {
 
   userdata: any;
 
-  constructor(private alertcontroller: AlertController, private toastController: ToastController, private authservice: AuthService, private formBuilder: FormBuilder, private menuController: MenuController, private ApiCrud: ApiCrudService, private router: Router) { 
+  constructor(
+    private alertcontroller: AlertController, 
+    private toastController: ToastController, 
+    private authservice: AuthService, 
+    private formBuilder: FormBuilder, 
+    private menuController: MenuController, 
+    private ApiCrud: ApiCrudService, 
+    private router: Router) { 
     this.registroForm = this.formBuilder.group({
-      'username': new FormControl(this.newUsuario.username, [Validators.required, Validators.minLength(4)]),
-      'password': new FormControl(this.newUsuario.password, [Validators.required, Validators.minLength(4)]),
-      'role': new FormControl(this.newUsuario.role, [Validators.required])
+      'username': new FormControl(this.newAlumno.username, [Validators.required, Validators.minLength(4)]),
+      'password': new FormControl(this.newAlumno.password, [Validators.required, Validators.minLength(4)])
     });
    }
 
@@ -38,15 +44,33 @@ export class RegistroPage implements OnInit {
   MostrarMenu(){
     this.menuController.open('first');
   }
-  crearUsuario() {
+  crearAlumno() {
     if (this.registroForm.valid){
-      this.newUsuario = this.registroForm.value;
-      this.ApiCrud.crearUsuario(this.newUsuario).subscribe(() => {
+      const formValues = this.registroForm.value;
+      this.newAlumno = {
+        username: formValues.username,
+        password: formValues.password,
+        role: "alumno"
+      };
+      this.authservice.crearAlumno(this.newAlumno).subscribe(() => {
+        this.registroForm.reset();
         this.router.navigateByUrl("/login");
+        const mensaje = "Registro exitoso. Porfavor inicia sesión a continuación.";
+        this.showToast(mensaje);
       });
     } else {
       this.datosIncorrectos();
     }
+  }
+
+  async showToast(msg: any){
+    const toast=await this.toastController.create({
+      message : msg,
+      duration: 4000,
+      color: 'success',
+      mode: 'ios'
+    });
+    toast.present();
   }
 
   async datosIncorrectos(){

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AutorizadoGuard } from './guards/autorizado.guard';
 import { Router } from '@angular/router';
 import { AuthService } from './servicios/auth.service';
+import { MenuController } from '@ionic/angular';
 
 interface Componente{
   name: string;
@@ -16,11 +17,21 @@ interface Componente{
 })
 export class AppComponent {
   usuario: { role: string | undefined } = { role: '' };
-  constructor(private autorizadoGuard: AutorizadoGuard, private router: Router, private authService: AuthService) {}
+  constructor(
+    private autorizadoGuard: AutorizadoGuard, 
+    private router: Router, 
+    private authService: AuthService,
+    private menuController: MenuController) {}
 
-  ngOnInit() {
-    this.usuario.role = this.authService.GetUserRole();
-  }
+    ngOnInit() {
+      const role = sessionStorage.getItem('role');
+      const inicioComponente = this.componentes.find(componente => componente.name === 'Inicio');
+      if (role === 'docente' && inicioComponente) {
+        inicioComponente.redirecTo = '/inicio';
+      } else if (role === 'alumno' && inicioComponente) {
+        inicioComponente.redirecTo = '/inicio-alumno';
+      }
+    }
 
   componentes : Componente[] = [
     {
@@ -29,15 +40,14 @@ export class AppComponent {
       redirecTo:'/inicio'
     },
     {
-      name:'Información',
-      icon: 'information-circle-outline',
-      redirecTo:'/info'
-    },
-    {
       name:'Tareas',
       icon: 'book-outline',
       redirecTo:'/tareas'
+    },
+    {
+      name:'Información',
+      icon: 'information-circle-outline',
+      redirecTo:'/info'
     }
   ]
-
 }

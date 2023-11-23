@@ -2,21 +2,24 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="MostrarMenu()" color="primary">
-        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+        <ion-icon color="warning" slot="icon-only" name="menu-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Información</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <ion-text color="warning" class="ion-text-center">
-    <h1>Acerca de RegistrAPP</h1>
+  <ion-text class="ion-text-center">
+    <h1 style="font-size: 50px; font-weight: bold;">Acerca de Registr<ion-text color="warning" style="font-weight: bolder;">APP</ion-text></h1>
+    <p style="font-size: larger;">
+      Registr<ion-text color="warning" style="font-weight: bolder;">APP</ion-text> es una aplicación que permite a docentes y alumnos simplificar la tarea de registrar asistencia.
+      <br><br>Con tan solo un <b>código QR <ion-icon name="qr-code-outline"></ion-icon></b>
+      tu asistencia quedará registrada exitosamente con asignatura y fecha.
+      <br>Por otro lado, si eres docente podrás generar un <b>QR <ion-icon name="qr-code-outline"></ion-icon></b>
+      para que tus alumnos puedan registrar su asistencia.
+      <br><br>También, como alumno podras ver tus <a [routerLink]="['/tareas']" style="font-style: italic;">tareas</a> 
+      pendientes y como docente asignarlas fácilmente.
+    </p>
+    <img class="footer-img" src="assets/LOGO_APP.png" alt="RegistrAPP">
   </ion-text>
-  <p style="font-size: larger;">RegistrAPP es una aplicación que permite a docentes y alumnos simplificar la tarea de registrar asistencia. Con tan solo un código QR <ion-icon name="qr-code-outline"></ion-icon>
-  tu asistencia quedará registrada exitosamente con hora y fecha.
-  </p>
-  <img src="assets/LOGO_APP.png" alt="RegistrAPP">
-
 </ion-content>
